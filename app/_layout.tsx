@@ -5,7 +5,6 @@ import {useFonts} from 'expo-font'
 import {Stack} from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import {useEffect} from 'react'
-
 import {useColorScheme} from '@/components/useColorScheme'
 
 export {
@@ -20,6 +19,19 @@ export const unstable_settings = {
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
+
+function RootLayoutNav() {
+  const colorScheme = useColorScheme()
+
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{headerShown: false}} />
+        <Stack.Screen name="details" options={{presentation: 'modal'}} />
+      </Stack>
+    </ThemeProvider>
+  )
+}
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -39,17 +51,4 @@ export default function RootLayout() {
   if (!loaded) return null
 
   return <RootLayoutNav />
-}
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme()
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{headerShown: false}} />
-        <Stack.Screen name="modal" options={{presentation: 'modal'}} />
-      </Stack>
-    </ThemeProvider>
-  )
 }

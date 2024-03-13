@@ -4,6 +4,6 @@ module.exports = {
   rules: {
     semi: 0,
     'comma-dangle': ['error', 'never'],
-    curly: ['error', 'multi']
+    curly: ['error', 'multi-or-nest', 'consistent']
   }
 }

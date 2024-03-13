@@ -17,7 +17,7 @@ const HeaderRightLink = () => {
   const colorScheme = useColorScheme()
 
   return (
-    <Link href="/modal" asChild>
+    <Link href="/details" asChild>
       <Pressable>
         {({pressed}) => (
           <FontAwesome
@@ -49,7 +49,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Tab One',
-          tabBarIcon: ({color}) => TabBarIcon({name: 'link', color}),
+          tabBarIcon: ({color}) => TabBarIcon({name: 'leanpub', color}),
           headerRight: HeaderRightLink
         }}
       />
@@ -57,6 +57,13 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'Tab Two',
+          tabBarIcon: ({color}) => TabBarIcon({name: 'leaf', color})
+        }}
+      />
+      <Tabs.Screen
+        name="three"
+        options={{
+          title: 'Tab Three',
           tabBarIcon: ({color}) => TabBarIcon({name: 'link', color})
         }}
       />
