@@ -6,11 +6,21 @@ import Colors from '@/constants/Colors'
 import {useColorScheme} from '@/components/useColorScheme'
 import {useClientOnlyValue} from '@/components/useClientOnlyValue'
 
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-const TabBarIcon = (props: {
+interface Props {
   name: React.ComponentProps<typeof FontAwesome>['name']
   color: string
-}) => <FontAwesome size={28} style={styles.tabBarIcon} {...props} />
+  size?: number
+}
+
+// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+const TabBarIcon = ({name, color, size = 25}: Props) => (
+  <FontAwesome
+    size={size}
+    style={styles.tabBarIcon}
+    color={color}
+    name={name}
+  />
+)
 
 const HeaderRightLink = () => {
   const colorScheme = useColorScheme()
@@ -40,6 +50,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarStyle: {height: 60, paddingBottom: 5},
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true)
@@ -48,12 +59,20 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Mis listas',
-          tabBarIcon: ({color}) => TabBarIcon({name: 'leaf', color}),
+          tabBarIcon: ({color}) => TabBarIcon({name: 'list', color}),
           headerRight: HeaderRightLink
         }}
       />
       <Tabs.Screen
         name="two"
+        options={{
+          title: 'Añadir planta',
+          tabBarIcon: ({color}) =>
+            TabBarIcon({name: 'plus-circle', color, size: 35})
+        }}
+      />
+      <Tabs.Screen
+        name="three"
         options={{
           title: 'Opciones',
           tabBarIcon: ({color}) => TabBarIcon({name: 'gear', color})

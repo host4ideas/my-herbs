@@ -39,7 +39,10 @@ export const PlantListLink = forwardRef<typeof CustomPressable, Props>(
       <CustomPressable onPress={handleLinkPress}>
         <View style={styles.rowItem} key={props.item.id}>
           {isEditing ? (
-            <MonoTextInput style={styles.rowItemText} placeholder="Nombre " />
+            <MonoTextInput
+              style={styles.rowItemText}
+              placeholder="Nuevo nombre..."
+            />
           ) : (
             <MonoText style={styles.rowItemText}>{props.item.name}</MonoText>
           )}
@@ -84,6 +87,7 @@ const styles = StyleSheet.create({
     display: 'flex'
   },
   rowItemText: {
-    fontSize: 18
+    fontSize: 18,
+    width: '90%'
   }
 })
