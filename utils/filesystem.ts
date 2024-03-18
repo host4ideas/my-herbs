@@ -3,7 +3,9 @@ import {
   getInfoAsync,
   makeDirectoryAsync,
   readAsStringAsync,
-  documentDirectory
+  documentDirectory,
+  EncodingType,
+  copyAsync
 } from 'expo-file-system'
 import {getDocumentAsync} from 'expo-document-picker'
 export const DATABASE_DIR = documentDirectory + 'myherbs/'
@@ -39,7 +41,7 @@ export const fileToU8 = async (path: string): Promise<Uint8Array | null> => {
   return strToU8(content)
 }
 
-export const pickZipAsync = async (type: string | string[]) => {
+export const pickFileAsync = async (type: string | string[]) => {
   const result = await getDocumentAsync({
     type,
     multiple: false,
@@ -47,12 +49,16 @@ export const pickZipAsync = async (type: string | string[]) => {
   })
   if (!result.canceled && result.assets.length === 1) {
     const pickedFile = result.assets[0]
-    const content = await readAsStringAsync(pickedFile.uri)
     return {
       uri: pickedFile.uri,
-      name: pickedFile.name,
-      content: strToU8(content)
+      name: pickedFile.name
     }
   }
   return null
+}
+
+export const copyFileAsync = async (from: string, to: string) => {
+  const fileInfo = await getInfoAsync(from)
+  if (!fileInfo.exists || fileInfo.isDirectory) return false
+  return await copyAsync({from, to})
 }

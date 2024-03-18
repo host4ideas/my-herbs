@@ -1,17 +1,12 @@
 import React from 'react'
-import {DimensionValue, StyleSheet} from 'react-native'
-import {Text, View} from '@/components/Themed'
+import {StyleSheet} from 'react-native'
+import {View} from '@/components/Themed'
 import {SafeAreaView} from 'react-native-safe-area-context'
-import {HorizontalSeparator} from '@/components/HorizontalSeparator'
 import {PlantList} from '@/components/PlantList'
-
-const maxWidth: DimensionValue = '80%'
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <HorizontalSeparator widthValue={maxWidth} />
       <SafeAreaView style={styles.list}>
         <PlantList />
       </SafeAreaView>
@@ -31,6 +26,6 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 1,
-    width: '80%'
+    width: '90%'
   }
 })

@@ -2,7 +2,6 @@ import React from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import {Link, Tabs} from 'expo-router'
 import {Pressable, StyleSheet} from 'react-native'
-
 import Colors from '@/constants/Colors'
 import {useColorScheme} from '@/components/useColorScheme'
 import {useClientOnlyValue} from '@/components/useClientOnlyValue'
@@ -17,11 +16,11 @@ const HeaderRightLink = () => {
   const colorScheme = useColorScheme()
 
   return (
-    <Link href="/details" asChild>
+    <Link href="/edit-plant" asChild>
       <Pressable>
         {({pressed}) => (
           <FontAwesome
-            name="info-circle"
+            name="plus-circle"
             size={25}
             color={Colors[colorScheme ?? 'light'].text}
             style={
@@ -48,23 +47,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({color}) => TabBarIcon({name: 'leanpub', color}),
+          title: 'Mis listas',
+          tabBarIcon: ({color}) => TabBarIcon({name: 'leaf', color}),
           headerRight: HeaderRightLink
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({color}) => TabBarIcon({name: 'leaf', color})
-        }}
-      />
-      <Tabs.Screen
-        name="three"
-        options={{
-          title: 'Tab Three',
-          tabBarIcon: ({color}) => TabBarIcon({name: 'link', color})
+          title: 'Opciones',
+          tabBarIcon: ({color}) => TabBarIcon({name: 'gear', color})
         }}
       />
     </Tabs>
